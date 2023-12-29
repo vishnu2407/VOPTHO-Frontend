@@ -1,40 +1,50 @@
-import React, { useState } from 'react';
-import { Link } from 'react-scroll';
-import eye1 from '../Assets/eye1.jpeg';
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 
-const Navbar = () => { 
-  const value = true;
 
-  const handleLogoClick =() => {
-    window.location.reload();
-  }
+export default function MenuAppBar() {
+  const [auth, setAuth] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleChange = (event) => {
+    setAuth(event.target.checked);
+  };
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
-    <div className='fixed w-full text-2xl h-[50px] flex justify-between center px-4 bg-blue-100 text-black z-300'>
-      <div>
-        <img src={eye1} alt='Logo' style={{ width: '80px', height: '80px'}} items-circle="true" value={value.toString()} onClick={handleLogoClick} />
-      </div>
-
-      {/* menu */}
-      <ul className='hidden md:flex md:space-x-4'>
-        <li>
-          <Link to='home' smooth={true} duration={250}>
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link to='about' smooth={true} duration={250}>
-            About
-          </Link>
-        </li>
-        <li>
-          <Link to='contact' smooth={true} duration={250}>
-            Contact
-          </Link>
-        </li>
-      </ul>
-    </div>
+    <Box sx={{ flexGrow: 1 }}>
+      {/* <FormGroup>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={auth}
+              onChange={handleChange}
+              aria-label="login switch"
+            />
+          }
+          label={auth ? 'Logout' : 'Login'}
+        />
+      </FormGroup> */}
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            VOPTHO
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
-};
-
-export default Navbar;
+}
